@@ -1,3 +1,4 @@
+//Good example
 interface Command {
     void execute();
 }
@@ -54,3 +55,37 @@ public class CommandPatternExample {
         remote.submit(lightOff);
     }
 }
+
+//Bad example 
+class Light {
+    public void turnOn() {
+        System.out.println("Light is ON");
+    }
+
+    public void turnOff() {
+        System.out.println("Light is OFF");
+    }
+}
+
+class RemoteControl {
+    private Light light = new Light();
+
+    public void pressButton(String action) {
+        if (action.equals("ON")) {
+            light.turnOn();
+        } else if (action.equals("OFF")) {
+            light.turnOff();
+        } else {
+            System.out.println("Invalid action");
+        }
+    }
+}
+
+public class BadCommandExample {
+    public static void main(String[] args) {
+        RemoteControl remote = new RemoteControl();
+        remote.pressButton("ON");
+        remote.pressButton("OFF");
+    }
+}
+
